@@ -1,0 +1,23 @@
+import { Grid, Stack } from "@mui/material";
+
+/**
+ * Summary of chat logs for a ticket.
+ * @param {Object} param0
+ * @param {Record<string, string>} param0.labelItems - List of label items to display in the summary.
+ */
+export function TicketLogFormSummary({ labelItems }) {
+  const labelKeys = Object.keys(labelItems);
+
+  return (
+    <Grid container spacing={2} className="tw-flex-none tw-h-min">
+      {labelKeys.map((key) => (
+       <Grid item key={key} xs={12} sm={6} className="tw-flex-none tw-h-min">
+         <Stack>
+          <span className="tw-text-xs tw-text-gray-400">{key}</span>
+          <span className="tw-text-xs tw-font-semibold">{labelItems[key]}</span>
+        </Stack>
+       </Grid>
+      ))}
+    </Grid>
+  );
+}
