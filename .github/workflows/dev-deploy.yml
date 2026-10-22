@@ -1,0 +1,28 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: ['dev-deploy']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        uses: oven-sh/setup-bun@v2
+      - name: Install Dependency and Build
+        run: |
+          bun pm untrusted
+          bun install
+          bun run build
+      - name: Copy to SERVER APP
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: ${{ secrets.SSH_PORT }}
+          source: 'dist/*'
+          target: '/var/www'
