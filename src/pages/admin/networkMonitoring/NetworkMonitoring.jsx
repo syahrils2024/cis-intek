@@ -11,12 +11,13 @@ import TreeView from './components/TreeView';
 import SlaDialog from './components/SlaDialog';
 import FormDialog from './components/FormDialog';
 import NotificationTemplate from './notificationTemplate';
+import NetworkTopologyMap from './components/NetworkTopologyMap';
 import { useNetworkMonitoringState } from './networkMonitoring.state';
 import { useNetworkMonitoringSocket } from './networkMonitoringSocket';
 import NetworkMonitoringFilter from './components/NetworkMonitoringFilter';
 import NetworkMonitoringGroupFormDialog from './components/NetworkMonitoringGroupFormDialog';
 
-const TABS = ['Network Map', 'Template Notifikasi'];
+const TABS = ['Network Map', 'Jaringan', 'Template Notifikasi'];
 
 export default function NetworkMonitoring() {
   const [selectedTab, setSelectedTab] = useState(0);
@@ -129,7 +130,8 @@ export default function NetworkMonitoring() {
         </>
       )}
 
-      {selectedTab === 1 && <NotificationTemplate />}
+      {selectedTab === 1 && <NetworkTopologyMap />}
+      {selectedTab === 2 && <NotificationTemplate />}
     </>
   );
 }

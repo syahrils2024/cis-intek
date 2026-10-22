@@ -612,3 +612,12 @@ export async function getNetworkStatus({ area }, signal) {
   });
   return data.message;
 }
+
+/**
+ * Topologi jaringan (Server -> POP -> OLT/ODP) untuk tab Jaringan.
+ * @returns {Promise<{generatedAt: string, nodes: Array<{id: string, parent: string|null, kind: 'server'|'pop'|'olt'|'odp', label: string, sub?: string, status: string, total?: number, active?: number, isolated?: number}>}>}
+ */
+export async function getNetworkTopology() {
+  const { data } = await axios.get(`${BASEURL}/admin/area/network-topology`);
+  return data.message;
+}
